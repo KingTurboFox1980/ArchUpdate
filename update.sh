@@ -33,6 +33,22 @@ repair_pacman_lock() {
     fi
 }
 
+# Refresh mirror list
+echo -e "\e[30;48;5;10m***** REFRESHING MIRRORS *****\e[0m"
+sudo reflector --verbose -l 5 -n 5 -p http --sort rate --save /etc/pacman.d/mirrorlist
+echo ""
+
+# Refresh keys
+echo -e "\e[30;48;5;10m***** REFRESHING KEYS *****\e[0m"
+sudo pacman-key --init
+sudo pacman-key --populate archlinux
+echo ""
+
+# Update Keyring
+echo -e "\e[30;48;5;10m***** UPDATING ARCH LINUX KEYRING *****\e[0m"
+sudo pacman -Sy archlinux-keyring --noconfirm
+echo ""
+
 # Function to update the system
 update_system() {
     echo "Updating the system..."
@@ -47,17 +63,6 @@ update_system
 
 echo -e "\e[30;48;5;10m***** REMOVING UNUSED PACKAGES (ORPHANS) *****\e[0m"
 sudo pacman -Qqtd
-echo ""
-
-# Refresh mirror list
-echo -e "\e[30;48;5;10m***** REFRESHING MIRRORS *****\e[0m"
-sudo reflector --verbose -l 5 -n 5 -p http --sort rate --save /etc/pacman.d/mirrorlist
-echo ""
-
-# Refresh keys
-echo -e "\e[30;48;5;10m***** REFRESHING KEYS *****\e[0m"
-sudo pacman-key --init
-sudo pacman-key --populate archlinux
 echo ""
 
 # Refresh Font cache
@@ -81,11 +86,6 @@ echo ""
 # Update Snaps
 echo -e "\e[30;48;5;10m***** UPDATING SNAP PACKAGES *****\e[0m"
 sudo snap refresh
-echo ""
-
-# Update Keyring
-echo -e "\e[30;48;5;10m***** UPDATING ARCH LINUX KEYRING *****\e[0m"
-sudo pacman -Sy archlinux-keyring --noconfirm
 echo ""
 
 # yay System Update
