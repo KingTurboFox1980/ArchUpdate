@@ -9,6 +9,11 @@ date
 
 paru -P --stats
 
+#SYNCHRONIZING SYSTEM CLOCK
+echo -e "\e[30;48;5;13m***** SYNCHRONIZING SYSTEM CLOCK *****\e[0m"
+sudo timedatectl set-ntp true
+echo ""
+
 # Function to check if any package manager processes are running
 echo -e "\e[30;48;5;10m***** REMOVING PACMAN LOCK IF ANY *****\e[0m"
 check_pacman_processes() {
@@ -59,8 +64,12 @@ update_system() {
 repair_pacman_lock
 update_system
 
-# Remove orphan packages
+# CLEARING PACKAGE CACHE
+echo -e "\e[30;48;5;12m***** CLEARING PACKAGE CACHE *****\e[0m"
+sudo pacman -Sc
+echo ""
 
+# Remove orphan packages
 echo -e "\e[30;48;5;10m***** REMOVING UNUSED PACKAGES (ORPHANS) *****\e[0m"
 sudo pacman -Qqtd
 echo ""
@@ -121,8 +130,8 @@ echo ""
 # echo ""
 
 # Clean the journal
-echo -e "\e[30;48;5;10m***** CLEANING JOURNAL *****\e[0m"
-sudo journalctl --vacuum-time=2weeks
+echo -e "\e[30;48;5;8m***** CLEANING JOURNAL LOGS *****\e[0m"
+sudo journalctl --vacuum-size=100M
 echo ""
 
 # Display failed systemd services including inactive
@@ -162,7 +171,7 @@ echo ""
 echo -e "\e[1;32mDone.\e[0m"
 
 # Trim
-echo -e "\e[30;48;5;10m***** TRIM nVME *****\e[0m"
+echo -e "\e[30;48;5;10m***** OPTIMIZING nVME PERFORMANCE (DISK TRIM) *****\e[0m"
 sudo fstrim -v /
 echo ""
 
