@@ -22,7 +22,7 @@ sudo reflector --country 'Canada, US' --latest 10 --age 5 --protocol https --sor
 
 # Install desired packages
 
-paru -S --noconfirm git yay ffmpeg neovim thunar ffmpegthumbnailer nordic-theme papirus-icon-theme zsh htop flatpak kate krita fastfetch evolution evolution-on evolution-spamassassin evolution-bogofilter evolution-data-server evolution-ews engrampa intel-media-driver intel-media-sdk font-manager fontconfig
+paru -S --noconfirm git gnome-keyring speedtest-ui ffmpeg neovim thunar ffmpegthumbnailer nordic-theme papirus-icon-theme zsh htop flatpak kate krita fastfetch evolution evolution-on evolution-spamassassin evolution-bogofilter evolution-data-server evolution-ews engrampa intel-media-driver intel-media-sdk font-manager fontconfig
 
 
 # Install Fonts
